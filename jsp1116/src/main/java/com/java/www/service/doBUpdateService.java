@@ -21,7 +21,7 @@ public class doBUpdateService implements Service {
 		String update="c:/upload";
 		int size = 10*1024*1024; //10MB
 		int bno;
-		String id,btitle,bcontent,bfile,oldBfile="";
+		String id="",btitle="",bcontent="",bfile="",oldBfile="";
 		
 		try {
 			MultipartRequest multi = new MultipartRequest(request, update, size, "utf-8", new DefaultFileRenamePolicy());
@@ -30,7 +30,6 @@ public class doBUpdateService implements Service {
 			id = multi.getParameter("id");
 			btitle = multi.getParameter("btitle");
 			bcontent = multi.getParameter("bcontent");
-			bfile = multi.getParameter("bfile");
 			oldBfile = multi.getParameter("oldBfile");
 	
 			System.out.println("doBUpServi : " + oldBfile );
@@ -39,7 +38,7 @@ public class doBUpdateService implements Service {
 			Enumeration files = multi.getFileNames();
 			
 			//1개의 input type=file 있기 때문에 무조건 실행됨.
-			if(files.hasMoreElements()) {
+			if(files.hasMoreElements()) { //있는 것으로 판단
 				String f = (String)files.nextElement();
 				bfile = multi.getFilesystemName(f);//파일 첨부가 없으면 null, 있으면 파일이름을 넣어줌.
 			}

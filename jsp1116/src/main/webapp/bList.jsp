@@ -70,9 +70,6 @@
 		   	<a href="#"><span>9</span></a>
 		   	<a href="#"><span>10</span></a>
 		   	<a href="#"><span>▶</span></a>
-		
-					   
-		   
 		   </div>
 		   <a href="bInsert.do"><button type="button">Write</button></a>
 		   <a href="index.do"><button type="button">Home</button></a>
