@@ -106,7 +106,7 @@ public class FController extends HttpServlet {
 			System.out.println("bDelete.jsp호출");
 			url="bDelete.jsp";
 			break;	
-			
+
 			
 			
 		
