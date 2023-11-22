@@ -11,11 +11,26 @@ public class BoardDto {
 	private String id;
 	private int bgroup;
 	private int bstep;
-	private int bindendt;
+	private int bindent;
 	private int bhit;
 	private String bfile;
 	
 	public BoardDto() {}
+	
+	
+
+	public BoardDto(String btitle, String bcontent, String id, int bgroup, int bstep, int bindendt, String bfile) {
+		super();
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.id = id;
+		this.bgroup = bgroup;
+		this.bstep = bstep;
+		this.bindent = bindent;
+		this.bfile = bfile;
+	}
+
+
 
 	public BoardDto(String btitle, String bcontent, String id, String bfile) {
 		super();
@@ -44,7 +59,7 @@ public class BoardDto {
 		this.id = id;
 		this.bgroup = bgroup;
 		this.bstep = bstep;
-		this.bindendt = bindendt;
+		this.bindent = bindent;
 		this.bhit = bhit;
 		this.bfile = bfile;
 	}
@@ -105,12 +120,12 @@ public class BoardDto {
 		this.bstep = bstep;
 	}
 
-	public int getBindendt() {
-		return bindendt;
+	public int getBindent() {
+		return bindent;
 	}
 
-	public void setBindendt(int bindendt) {
-		this.bindendt = bindendt;
+	public void setBindent(int bindent) {
+		this.bindent = bindent;
 	}
 
 	public int getBhit() {

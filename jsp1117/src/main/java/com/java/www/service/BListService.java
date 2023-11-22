@@ -44,6 +44,7 @@ public class BListService implements Service {
 		
 		//request추가
 		request.setAttribute("list", list);
+		System.out.println("BlistService list : "+list);
 		request.setAttribute("page", page);
 		request.setAttribute("listCount", listCount);
 		request.setAttribute("maxPage", maxPage);
