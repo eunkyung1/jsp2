@@ -20,6 +20,7 @@ public class MemberDao {
 	String id,pw,name,phone,gender,hobby,query;
 	Timestamp mdate;
 	MemberDto mdto = null;
+	int result=0;
 	
 	
 	//커넥션 풀에서 Connection 가져오기
@@ -101,6 +102,64 @@ public class MemberDao {
 			} catch (Exception e2) { e2.printStackTrace();}
 		}//
 		return mdto; //mdto-id가 있다.(사용불가능)/ null-id가 없다.(사용가능)
+	}
+
+	public int mInsert(MemberDto mdto2) {
+		try {
+			conn = getConnection();
+			query = "insert into member values(?,?,?,?,?,?,sysdate)";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, mdto2.getId());
+			pstmt.setString(2, mdto2.getPw());
+			pstmt.setString(3, mdto2.getName());
+			pstmt.setString(4, mdto2.getPhone());
+			pstmt.setString(5, mdto2.getGender());
+			pstmt.setString(6, mdto2.getHobby());
+			result = pstmt.executeUpdate();
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) { e2.printStackTrace();}
+		}//
+		
+		return result;
+	}
+	//회원정보수정 - updaTE
+	public int mUpdate(MemberDto mdto2) {
+		try {
+			conn = getConnection();
+			query = "update member set pw=?,phone=?,gender=?,hobby=? where id=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, mdto2.getPw());
+			System.out.println("1"+mdto2.getPw());
+			pstmt.setString(2, mdto2.getPhone());
+			System.out.println("2"+mdto2.getPhone());
+			pstmt.setString(3, mdto2.getGender());
+			System.out.println("3"+mdto2.getGender());
+			pstmt.setString(4, mdto2.getHobby());
+			System.out.println("4"+mdto2.getHobby());
+			pstmt.setString(5, mdto2.getId());
+			System.out.println("5"+mdto2.getId());
+			result = pstmt.executeUpdate();
+			System.out.println("Update : " + mdto2.getPw());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) { e2.printStackTrace();}
+		}//
+		
+		
+		return result;
 	}
 
 }

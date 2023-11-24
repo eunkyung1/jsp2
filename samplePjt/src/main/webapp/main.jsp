@@ -19,10 +19,9 @@
 	 				</c:if>
 	 				
 	 				<c:if test="${session_id!=null }">
-	 				<li class="txtbold">${session_nicName }님</li>
+	 				<li class="txtbold"><a href="m_info_input.do">${session_nicName}님</a></li>
 	 				<li><a href="logout.do">로그아웃</a></li>
 	 				</c:if>
-	 				
 	 				
 	 				<li><a href="n_list.do">고객행복센터</a></li>
 	 				<li>배송정보검색</li>

@@ -63,7 +63,7 @@
 		
 		
 		<section>
-			<form name="agreeFrm" method="get" action="join02_info_input.do">
+			<form name="agreeFrm" method="post" action="join02_info_input.do">
 				<div id="subBanner"></div>
 				<div id="locationN">
 					<ul>

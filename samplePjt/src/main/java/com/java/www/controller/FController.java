@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.java.www.service.DoLoginService;
+import com.java.www.service.MInsertService;
+import com.java.www.service.MSelectOneService;
+import com.java.www.service.MUpdateService;
 import com.java.www.service.N_listSelectService;
 import com.java.www.service.Service;
 
@@ -41,8 +44,26 @@ public class FController extends HttpServlet {
 			break;
 			
 		case "/join02_info_input.do": 
-			response.sendRedirect("join02_info_input.jsp");
+			url="join02_info_input.jsp";
 			break;
+			
+		case "/join03_success.do": 
+			service = new MInsertService();
+			service.execute(request, response);
+			url="join03_success.jsp";
+			break;
+		case "/m_info_input.do": //회원정보수정 페이지 -회원정보 1명 가져오기
+			service = new MSelectOneService();
+			service.execute(request, response);
+			url="m_info_input.jsp";
+			break;
+			
+		case "/doM_info_input.do": //회원정보수정
+			service = new MUpdateService();
+			service.execute(request, response);
+			url="doM_info_input.jsp";
+			break;
+			
 		case "/login.do": 
 			response.sendRedirect("login.jsp");
 			break;

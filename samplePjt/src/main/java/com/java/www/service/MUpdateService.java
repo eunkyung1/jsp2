@@ -1,0 +1,46 @@
+package com.java.www.service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.java.www.dao.MemberDao;
+import com.java.www.dto.MemberDto;
+
+public class MUpdateService implements Service {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		//String id = session.getParameter("id");
+		String id = (String)session.getAttribute("session_id");
+		String pw = request.getParameter("pw1");
+		System.out.println("pw"+pw);
+		String name = request.getParameter("name");
+		String f_tell = request.getParameter("f_tell");
+		String m_tell = request.getParameter("m_tell");
+		String l_tell = request.getParameter("l_tell");
+		String phone = f_tell+"-"+m_tell+"-"+l_tell;
+		System.out.println("phone"+phone);
+		String gender = request.getParameter("gender");
+		System.out.println("gender"+gender);
+		String[] hobbys = request.getParameterValues("hobby");
+		String hobby="";
+		for(int i=0;i<hobbys.length;i++) {
+			if(i==0) hobby = hobbys[0];
+			else hobby += ","+hobbys[i];
+			System.out.println("hobby"+hobby);
+		}
+		
+		MemberDto mdto = new MemberDto(id, pw, name, phone, gender, hobby);
+		
+		//-update
+			MemberDao mdao = new MemberDao();
+			int result = mdao.mUpdate(mdto);
+				
+			System.out.println("result" + result);
+			request.setAttribute("result", result);
+		
+	}
+
+}
