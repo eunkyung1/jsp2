@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>공지사항 게시판</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&display=swap&subset=korean"
 	rel="stylesheet">
@@ -15,6 +16,19 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/notice_list.css">
+<script>
+$(function(){
+	$(".write").click(function(){
+		//alert("test");
+		//alert("섹션 : ${session_id}");
+		if("${session_id}"=="" ){
+			alert("로그인을 하셔야 글쓰기가 가능합니다. 로그인 해주세요.");
+			return false;
+		}
+		location.href="n_insert.do";
+	})
+});
+</script>
 <style>
 .txtOn {
 	background: #202020;
@@ -26,20 +40,23 @@
 <body>
 	<header>
 		<ul>
-			<li>회원가입</li>
-			<span>|</span>
-			<li>로그인</li>
-			<span>|</span>
-			<li>고객행복센터</li>
-			<span>|</span>
-			<li>배송지역검색</li>
-			<span>|</span>
+			<c:if test="${session_id==null }">
+ 				<li><a href="join01_terms.do">회원가입</a></li><span>|</span>
+ 				<li><a href="login.do">로그인</a></li><span>|</span>
+	 		</c:if>
+			<c:if test="${session_id!=null }">
+				<li class="txtbold"><a href="m_info_input.do">${session_nicName}님</a></li>
+ 				<li><a href="logout.do">로그아웃</a></li><span>|</span>
+	 		</c:if>
+		
+			<li><a href="n_list.do">고객행복센터</a></li><span>|</span>
+			<li>배송지역검색</li><span>|</span>
 			<li>기프트카드 등록</li>
 		</ul>
 	</header>
 
 	<nav>
-		<div class="logo"></div>
+		<a href="main.do"><div class="logo"></div></a>
 
 		<div id="search">
 			<div class="search"></div>
@@ -82,8 +99,7 @@
 			</form>
 		</div>
 
-		<table>
-
+		<table class="listColor">
 			<colgroup>
 				<col width="12%">
 				<col width="45%">
@@ -101,16 +117,19 @@
 			</tr>
 
 			<!-- 반복시작 -->
-			<c:forEach items="${list}" var="bdto">
+			<c:forEach  items="${list}" var="bdto">
 				<tr>
 					<td>${bdto.bno }</td>
-					<td class="table-title"><a href="">${bdto.btitle}</a></td>
+					<td class="table-title">
+					<c:forEach var="c" begin="1" end="${bdto.bindent}" step="1" >▶</c:forEach>
+					<a href="n_view.do?bno=${bdto.bno}">${bdto.btitle}</a></td>
 					<td>${bdto.id}</td>
 					<td><fmt:formatDate value="${bdto.bdate}" pattern="yyyy-MM-dd" /></td>
 					<td>${bdto.bhit }</td>
 				</tr>
 			</c:forEach>
 			<!-- 반복끝 -->
+		
 		</table>
 
 		<ul class="page-num">
