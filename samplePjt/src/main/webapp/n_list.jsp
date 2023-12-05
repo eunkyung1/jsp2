@@ -19,15 +19,31 @@
 <script>
 $(function(){
 	$(".write").click(function(){
-		//alert("test");
-		//alert("섹션 : ${session_id}");
 		if("${session_id}"=="" ){
 			alert("로그인을 하셔야 글쓰기가 가능합니다. 로그인 해주세요.");
 			return false;
+			
+			
+			
+			
+			
+			
 		}
 		location.href="n_insert.do";
-	})
-});
+	});//wirte click
+	
+	$("#sBtn").click(function(){
+		if($("#sword").val()==""){
+			alert("검색어를 입력하셔야 합니다.");
+			$("#sword").focus();
+			return false;
+		}
+		
+		searchFrm.submit();
+	});//sBtn click
+	
+	
+});//function
 </script>
 <style>
 .txtOn {
@@ -82,22 +98,23 @@ $(function(){
 	<section>
 		<h1>NOTICE</h1>
 		<div class="wrapper">
-			<form action="/search" name="search" method="post">
+		
+			<!-- 검색부분 -->
+			<form action="n_list.do" name="searchFrm" method="post">
 				<select name="category" id="category">
-					<option value="0">전체</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
+					<option value="all">전체</option>
+					<option value="btitle">제목</option>
+					<option value="bcontent">내용</option>
 				</select>
 
 				<div class="title">
-					<input type="text" size="16">
+					<input type="text" name="sword" id="sword" size="16">
 				</div>
 
-				<button type="submit">
-					<i class="fas fa-search"></i>
-				</button>
+					<button typr="button" id="sBtn"><i class="fas fa-search"></i></button>
 			</form>
 		</div>
+			<!-- 검색부분 끝-->
 
 		<table class="listColor">
 			<colgroup>
@@ -122,7 +139,7 @@ $(function(){
 					<td>${bdto.bno }</td>
 					<td class="table-title">
 					<c:forEach var="c" begin="1" end="${bdto.bindent}" step="1" >▶</c:forEach>
-					<a href="n_view.do?bno=${bdto.bno}">${bdto.btitle}</a></td>
+					<a href="n_view.do?page=${page}&bno=${bdto.bno}&category=${category}&sword=${sword}">${bdto.btitle}</a></td>
 					<td>${bdto.id}</td>
 					<td><fmt:formatDate value="${bdto.bdate}" pattern="yyyy-MM-dd" /></td>
 					<td>${bdto.bhit }</td>
@@ -133,35 +150,35 @@ $(function(){
 		</table>
 
 		<ul class="page-num">
-			<a href="n_list.do?page=1"><li class="first"></li></a>
+			<a href="n_list.do?page=1&category=${category}&sword=${sword}"><li class="first"></li></a>
 			<c:if test="${page>1 }">
-				<a href="n_list.do?page=${page-1}"><li class="prev"></li></a>
+				<a href="n_list.do?page=${page-1}&category=${category}&sword=${sword}"><li class="prev"></li></a>
 			</c:if>
-			<c:if test="${page<=1 }">
+			<c:if test="${page<=1}">
 				<li class="prev"></li>
 			</c:if>
 
 			<!-- 하단넘버링  -->
 			<c:forEach var="n" begin="${startPage}" end="${endPage }" step="1">
-				<c:if test="${page==n }">
+				<c:if test="${page==n}">
 					<li class="num txtOn">
 						<div>${n}</div>
 					</li>
 				</c:if>
 				<c:if test="${page!=n }">
-					<li class="num"><a href="n_list.do?page=${n}"><div>${n}</div></a>
+					<li class="num"><a href="n_list.do?page=${n}&category=${category}&sword=${sword}"><div>${n}</div></a>
 					</li>
 				</c:if>
 				<!-- 하단넘버링  -->
 
 			</c:forEach>
 			<c:if test="${page<maxPage }">
-				<a href="n_list.do?page=${page+1 }"><li class="next"></li></a>
+				<a href="n_list.do?page=${page+1}&category=${category}&sword=${sword}"><li class="next"></li></a>
 			</c:if>
 			<c:if test="${page>=maxPage }">
 				<li class="next"></li>
 			</c:if>
-			<a href="n_list.do?page=${maxPage }"><li class="last"></li></a>
+			<a href="n_list.do?page=${maxPage}&category=${category}&sword=${sword}"><li class="last"></li></a>
 		</ul>
 
 		<div class="write">쓰기</div>

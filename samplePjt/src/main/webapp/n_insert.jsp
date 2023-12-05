@@ -79,21 +79,11 @@
           <col width="15%">
           <col width="85%">
         </colgroup>
-        <tr>
-          <th>분류</th>
-          <td>
-            <div class="category-wrapper">
-              <select name="category" id="category">
-                <option value="notice">공지</option>
-                <option value="event">이벤트</option>
-              </select>  
-            </div>
-          </td>
-        </tr>
+        
         <tr>
           <th>제목</th>
           <td>
-            <input type="text" name="btitle" id="btitle" value="[답글]"${bdto.btitle} }>
+            <input type="text" name="btitle" id="btitle" value=${bdto.btitle}>
           </td>
         </tr>
         <tr>

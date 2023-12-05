@@ -9,7 +9,7 @@
 	<body>
 	<script>
 		alert("게시글이 등록되었습니다.");
-		location.href="n_list.do";
+		location.href="n_list.do?page=${page}";
 	</script>
 	
 	</body>

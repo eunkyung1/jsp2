@@ -9,7 +9,7 @@
 	<body>
 	<script>
 		alert("답글이 게시되었습니다.");
-		location.href="n_list.do";
+		location.href="n_list.do?page=${page}&category=${category}&sword=${sword}";
 	</script>
 	
 	</body>

@@ -22,8 +22,8 @@ public class N_ReplyInsertService implements Service {
 		//변수 선언
 		HttpSession session = request.getSession();
 		String id= (String)session.getAttribute("session_id");
-		String btitle="",bcontent="",bfile="";
-		int bgroup=0, bstep=0, bindent=0;
+		String btitle="",bcontent="",bfile="",category="",sword="";
+		int bgroup=0, bstep=0, bindent=0, page=1;
 		
 		//form 데이터처리
 		String upload = "c:/upload";
@@ -31,7 +31,10 @@ public class N_ReplyInsertService implements Service {
 		
 		try {
 			MultipartRequest multi = new MultipartRequest(request, upload, size, "utf-8", new DefaultFileRenamePolicy());
+			page = Integer.parseInt(multi.getParameter("page"));
 			btitle = multi.getParameter("btitle");
+			category = multi.getParameter("category");
+			sword = multi.getParameter("sword");
 			System.out.println("N_ReplyInsertService btitle :"+btitle);
 			bcontent = multi.getParameter("bcontent");
 			bgroup = Integer.parseInt(multi.getParameter("bgroup"));
@@ -56,6 +59,9 @@ public class N_ReplyInsertService implements Service {
 			//request추가
 			System.out.println("N_ReplyInsertService result : "+result);
 			request.setAttribute("result", result);
+			request.setAttribute("page", page);
+			request.setAttribute("category", category);
+			request.setAttribute("sword", sword);
 			
 		} catch (IOException e) {e.printStackTrace();}
 		
