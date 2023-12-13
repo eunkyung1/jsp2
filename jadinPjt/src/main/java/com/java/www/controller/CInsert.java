@@ -1,6 +1,7 @@
 package com.java.www.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 
 import com.java.www.dao.EventDao;
 import com.java.www.dto.EcommentDto;
@@ -39,6 +42,26 @@ public class CInsert extends HttpServlet {
 		ecdto = edao.CInsert(bno, id, cpw,ccontent);
 		
 		System.out.println("Controller doAction cno : "+ecdto.getCno());
+		
+		//하단댓글 1개 ajax으로 보내기
+		//json형태로 보냄. xml형태 -> html - 자바jsp
+		JSONObject json = new JSONObject();
+		json.put("cno",ecdto.getCno()); //(key값, value) 
+		json.put("id",ecdto.getId()); //(key값, value) 
+		json.put("ccontent",ecdto.getCcontent()); //(key값, value) 
+		json.put("cdate",""+ecdto.getCdate()); //(key값, value) 
+		
+		response.setCharacterEncoding("utf-8"); //보내는 파일 한글처리
+		response.setContentType("application/x-json; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.print(json);
+		writer.close();
+		
+		
+		
+		
+		
+		
 		
 		
 	}

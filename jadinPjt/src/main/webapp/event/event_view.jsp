@@ -273,10 +273,35 @@ $(document).ready(function() {
 								url:"../CInsert",
 								type:"post",
 								data:{"bno":bno, "cpw":cpw, "ccontent":ccontent},
-								datatype:"json",
+								//datatype:"json",
 								success:function(data){
-									alert("성공");
-									console.log(data);
+									//alert("성공");
+									//alert("댓글번호 : "+data.cno);
+									//alert(data);
+									//console.log("댓글번호 : "+data.cno);
+									//console.log("댓글아이디 : "+data.id);
+									//console.log("댓글내용 : "+data.ccontent);
+									//console.log("댓글날짜 : "+data.cdate);
+									//console.log(data);
+									
+									//댓글등록 태그
+									var htmlData ='';
+									htmlData += '<ul id="'+data.cno+'">';
+									htmlData += '<li class="name"> '+data.id+'<span> ['+data.cdate+']</span></li>';
+									htmlData += '<li class="txt">'+data.ccontent+'</li>';
+									htmlData += '<li class="btn">';
+									htmlData += '<a class="rebtn">수정</a>&nbsp';
+									htmlData += '<a class="rebtn">삭제</a>';
+									htmlData += '</li>';
+									htmlData += '</ul>';
+									
+									
+									//댓글등록후 내용지우기
+									$(".replyBox").prepend(htmlData); //append()-마지막, prepend()-처음, html()-삭제 후 추가
+									alert("댓글을 등록합니다.");
+									$(".replynum").val("");	//비밀번호 글 삭제
+									$(".replyType").val("");//내용 글 삭제
+									
 								},
 								error:function(){
 									alert("실패");
@@ -284,22 +309,7 @@ $(document).ready(function() {
 								}
 							});
 							
-							//댓글등록 태그
-							var htmlData ='';
-							htmlData += '<ul id="0">';
-							htmlData += '<li class="name">aaa <span>[2023-12-05]</span></li>';
-							htmlData += '<li class="txt">'+ccontent+'</li>';
-							htmlData += '<li class="btn">';
-							htmlData += '<a class="rebtn">수정</a>&nbsp';
-							htmlData += '<a class="rebtn">삭제</a>';
-							htmlData += '</li>';
-							htmlData += '</ul>';
 							
-							
-							//댓글등록후 내용지우기
-							$(".replyBox").prepend(htmlData); //append()-마지막, prepend()-처음, html()-삭제 후 추가
-							alert("댓글을 등록합니다.");
-							$(".replyType").val("");
 						});
 						
 					});

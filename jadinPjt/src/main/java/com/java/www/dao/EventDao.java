@@ -117,7 +117,7 @@ public class EventDao {
 		ArrayList<EcommentDto> clist = new ArrayList<EcommentDto>();
 		try {
 			conn = getConnection();
-			query = "select * from ecomment where bno=?";
+			query = "select * from ecomment where bno=? order by cno desc";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bno2);
 			rs= pstmt.executeQuery();
@@ -167,7 +167,7 @@ public class EventDao {
 			pstmt.executeUpdate();
 			
 			//select-하단 댓글 1개 가져오기
-			query="select * from ecomment where cno=?";
+			query="select * from ecomment where cno=? ";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, cno);
 			rs= pstmt.executeQuery();

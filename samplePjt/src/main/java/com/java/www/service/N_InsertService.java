@@ -36,7 +36,7 @@ public class N_InsertService implements Service {
 			System.out.println("N_InsertService bcontent : "+bcontent);
 			
 			
-			//input type=file 인것 이름 모두를 가져옴.
+			//input type=file 인것 이름 모두를 가져옴.x
 			Enumeration files = multi.getFileNames();//bfile,bfile2,bfil3,bfile4
 			while(files.hasMoreElements()) {
 				String f = (String)files.nextElement(); //enum 형변환
@@ -48,7 +48,7 @@ public class N_InsertService implements Service {
 			//dao접근 - 게시글저장메소드 호출
 			int result = bdao.insert(bdto);
 			
-			//request추가
+			//request추가b
 			request.setAttribute("result", result);
 			
 		} catch (IOException e) {e.printStackTrace();}

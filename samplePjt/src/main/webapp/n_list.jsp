@@ -51,6 +51,7 @@ $(function(){
 	color: white;
 	font-weight: 700;
 }
+
 </style>
 </head>
 <body>
